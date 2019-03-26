@@ -1,0 +1,26 @@
+{
+  "name": "checkout_module",
+  "version": "1.0.0",
+  "description": "# Project Name",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hrsf113-group-2/checkout_module.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hrsf113-group-2/checkout_module/issues"
+  },
+  "homepage": "https://github.com/hrsf113-group-2/checkout_module#readme",
+  "devDependencies": {
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4"
+  }
+}
