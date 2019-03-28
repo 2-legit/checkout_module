@@ -1,19 +1,22 @@
 -- ---
--- Globals
+-- Database
 -- ---
 
--- SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
--- SET FOREIGN_KEY_CHECKS=0;
+DROP DATABASE IF EXISTS `checkout`;
+
+CREATE DATABASE `checkout`;
+
+USE `checkout`;
+
+DROP TABLE IF EXISTS `Room`;
 
 -- ---
 -- Table 'Room'
 -- 
 -- ---
-
-DROP TABLE IF EXISTS `Room`;
 		
 CREATE TABLE `Room` (
-  `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
+  `id` INTEGER NOT NULL AUTO_INCREMENT,
   `cost` INTEGER NULL DEFAULT NULL,
   `reviews` INTEGER NULL DEFAULT NULL,
   `guests` INTEGER NULL DEFAULT NULL,
@@ -28,7 +31,7 @@ CREATE TABLE `Room` (
 DROP TABLE IF EXISTS `Calendar`;
 		
 CREATE TABLE `Calendar` (
-  `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
+  `id` INTEGER NOT NULL AUTO_INCREMENT,
   `bookedDates` INTEGER NULL DEFAULT NULL,
   `room_id` INTEGER NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -39,13 +42,6 @@ CREATE TABLE `Calendar` (
 -- ---
 
 ALTER TABLE `Calendar` ADD FOREIGN KEY (room_id) REFERENCES `Room` (`id`);
-
--- ---
--- Table Properties
--- ---
-
--- ALTER TABLE `Room` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
--- ALTER TABLE `Calendar` ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ---
 -- Test Data
