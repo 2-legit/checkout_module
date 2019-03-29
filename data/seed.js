@@ -12,7 +12,7 @@ const createFakeRoom = () => ({
 const generateRooms = () => {
   const fakeRooms = [];
   const desiredRooms = 100;
-  for (let i = 0; i < desiredRooms; i++) {
+  for (let i = 0; i < desiredRooms; i += 1) {
     fakeRooms.push(createFakeRoom());
   }
   return fakeRooms;
@@ -20,14 +20,14 @@ const generateRooms = () => {
 
 const createFakeBooking = () => ({
   room_id: faker.random.number({ min: 1, max: 100 }),
-  bookedDates: faker.date.between('2019-1-1', '2020-1-1'),
+  booked_date: faker.date.between('2019-1-1', '2020-1-1'),
 });
 
 
 const generateBookings = () => {
   const fakeBookings = [];
-  const desiredBookings = 500;
-  for (let i = 0; i < desiredBookings; i++) {
+  const desiredBookings = 8000;
+  for (let i = 0; i < desiredBookings; i += 1) {
     fakeBookings.push(createFakeBooking());
   }
   return fakeBookings;
@@ -39,13 +39,10 @@ db.sequelize.drop()
       .then(() => {
         db.Room.bulkCreate(generateRooms())
           .then(() => {
-            db.Calendar.bulkCreate(generateBookings());
+            db.Calendar.bulkCreate(generateBookings(), { ignoreDuplicates: true });
           });
       });
   });
-
-// db.Room.bulkCreate(generateRooms());
-// db.Calendar.bulkCreate(generateBookings());
 
 module.exports.generateBookings = generateBookings;
 module.exports.generateRooms = generateRooms;

@@ -22,7 +22,6 @@ sequelize
   });
 
 const Room = sequelize.define('Room', {
-  // attributes
   cost: {
     type: Sequelize.INTEGER,
     allowNull: false,
@@ -42,7 +41,7 @@ const Room = sequelize.define('Room', {
 });
 
 const Calendar = sequelize.define('Calendar', {
-  bookedDates: {
+  booked_date: {
     type: Sequelize.DATEONLY,
     allowNull: false,
   },
@@ -50,13 +49,20 @@ const Calendar = sequelize.define('Calendar', {
     type: Sequelize.INTEGER,
     allowNull: false,
     references: {
-      model: Room,
+      model: 'Rooms',
       key: 'id',
     },
   },
+},
+{
+  indexes: [
+    {
+      unique: true,
+      fields: ['booked_date', 'room_id'],
+    },
+  ],
 });
 
-sequelize.sync();
 
 module.exports.Calendar = Calendar;
 module.exports.Room = Room;
