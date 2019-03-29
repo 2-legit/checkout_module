@@ -26,7 +26,7 @@ const createFakeBooking = () => ({
 
 const generateBookings = () => {
   const fakeBookings = [];
-  const desiredBookings = 8000;
+  const desiredBookings = 9000;
   for (let i = 0; i < desiredBookings; i += 1) {
     fakeBookings.push(createFakeBooking());
   }

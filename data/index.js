@@ -4,6 +4,7 @@ const config = require('./config');
 const sequelize = new Sequelize('checkout', 'root', `${config.PASSWORD}`, {
   host: 'localhost',
   dialect: 'mysql',
+  logging: false,
   pool: {
     max: 5,
     idle: 30000,
