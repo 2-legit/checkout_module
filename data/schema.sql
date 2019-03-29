@@ -32,7 +32,7 @@ DROP TABLE IF EXISTS `Calendar`;
 		
 CREATE TABLE `Calendar` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
-  `bookedDates` INTEGER NULL DEFAULT NULL,
+  `bookedDates` DATE DEFAULT NULL,
   `room_id` INTEGER NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
