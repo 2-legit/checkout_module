@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Checkout from './components/Checkout.jsx';
 
 class App extends React.Component {
   constructor() {
@@ -7,7 +8,7 @@ class App extends React.Component {
   }
   render() {
     return (
-      <div>Hello World</div>
+      <div><Checkout /></div>
     );
   }
 }
