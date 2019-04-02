@@ -13,16 +13,6 @@ app.use('/rooms/:room_id', express.static(path.join(__dirname, '..', 'client', '
 app.use(bodyparser.json());
 
 app.get('/rooms/:room_id/reservations', (req, res) => {
-  // db.Calendar.hasMany(db.Room, { foreignKey: 'id' });
-  // db.Room.belongsTo(db.Calendar, { foreignKey: 'id' });
-  // db.Calendar.findAll({
-  //   where: { room_id: req.params.room_id },
-  //   include: [{
-  //     model: db.Room,
-  //     required: false,
-  //     where: { id: req.params.room_id },
-  //   }],
-  // });
   db.sequelize.query(`select * from calendars inner join rooms where calendars.room_id = rooms.id and rooms.id = ${req.params.room_id}`)
     .then((bookings) => {
       res.send(bookings);
