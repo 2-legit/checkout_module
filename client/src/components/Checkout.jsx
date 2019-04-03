@@ -9,11 +9,11 @@ const Wrapper = styled.section`
   font-size: 14px;
   line-height: 1.43;
   color: #484848;
-  background-color: #ffffff !important;
-  border: 1px solid #e4e4e4 !important;
-  margin: 0px !important;
-  padding-right: 24px !important;
-  padding-left: 24px !important;
+  background-color: #ffffff;
+  border: 1px solid #e4e4e4;
+  margin: 0px;
+  padding-right: 24px;
+  padding-left: 24px;
   text-align: center;
 `;
 
@@ -26,7 +26,7 @@ class Checkout extends React.Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     fetch('/rooms/1/reservations') // hard coded TODO refactor to be dynamic
       .then(response => (
         response.json()
