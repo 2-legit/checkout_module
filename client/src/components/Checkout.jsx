@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import Review from './Review';
 
 const Wrapper = styled.section`
   display: block;
@@ -22,7 +23,7 @@ class Checkout extends React.Component {
   constructor() {
     super();
     this.state = {
-      rooms: [],
+      room: [],
       isLoaded: false,
     };
   }
@@ -35,7 +36,7 @@ class Checkout extends React.Component {
       .then((roomData) => {
         this.setState({
           isLoaded: true,
-          rooms: roomData[0],
+          room: roomData[0],
         });
       });
   }
@@ -46,13 +47,11 @@ class Checkout extends React.Component {
     }
     return (
       <Wrapper>
-        <div>{this.state.rooms[0].cost} per night</div>
-        <div>{this.state.rooms[0].avg_review}avg reviews</div>
-        <div>{this.state.rooms[0].reviews}reviews</div>
+        <div>{this.state.room[0].cost} per night</div>
+        <div><Review room={this.state.room[0]}/></div>
         <div>Dates</div>
-        <div>{this.state.rooms[0].guests} guests</div>
+        <div>{this.state.room[0].guests} guests</div>
         <div>Booked Button</div>
-        <div>You are the best</div>
       </Wrapper>
     );
   }
