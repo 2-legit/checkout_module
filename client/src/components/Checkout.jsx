@@ -53,7 +53,6 @@ class Checkout extends React.Component {
         <div>Dates</div>
         <div>{this.state.room[0].guests} guests</div>
         <div>Booked Button</div>
-        <div>You are the best</div>
       </Wrapper>
     );
   }
