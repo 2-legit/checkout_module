@@ -1,10 +1,12 @@
 const express = require('express');
 const path = require('path');
 const bodyparser = require('body-parser');
+const morgan = require('morgan');
 const db = require('../data/index');
 
 
 const app = express();
+app.use(morgan('dev'));
 
 const port = process.env.PORT || 3000;
 
