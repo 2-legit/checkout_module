@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 
 const Wrapper = styled.section`
@@ -27,7 +28,7 @@ class Checkout extends React.Component {
   }
 
   componentDidMount() {
-    fetch('/rooms/1/reservations') // hard coded TODO refactor to be dynamic
+    axios.get('/rooms/1/reservations') // hard coded TODO refactor to be dynamic
       .then(response => (
         response.json()
       ))
