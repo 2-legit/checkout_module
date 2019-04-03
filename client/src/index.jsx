@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Checkout from './components/Checkout.jsx';
+import Checkout from './components/Checkout';
 
 class App extends React.Component {
   constructor() {
