@@ -1,7 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import Review from './Review';
 import Cost from './Cost';
+
 
 const Wrapper = styled.section`
   display: block;
@@ -48,6 +50,7 @@ class Checkout extends React.Component {
     return (
       <Wrapper>
         <div><Cost room={this.state.room[0]}/></div>
+        <div><Review room={this.state.room[0]}/></div>
         <div>{this.state.room[0].avg_review}avg reviews</div>
         <div>{this.state.room[0].reviews}reviews</div>
         <div>Dates</div>
