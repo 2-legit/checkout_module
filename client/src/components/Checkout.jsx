@@ -30,7 +30,7 @@ class Checkout extends React.Component {
   componentDidMount() {
     axios.get('/rooms/1/reservations') // hard coded TODO refactor to be dynamic
       .then(response => (
-        response.json()
+        response.data
       ))
       .then((roomData) => {
         this.setState({
