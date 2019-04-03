@@ -9,15 +9,12 @@ const CostWrapper = styled.section`
   color: rgb(72, 72, 72);
   overflow-wrap: break-word;
   line-height: 1.44444em; 
-
 `;
 
 const NightWrapper = styled.section`
   float: left;
   font-size: 12px !important;
   font-weight: 600 !important;
-  
-
 `;
 
 const Cost = (props) => {
