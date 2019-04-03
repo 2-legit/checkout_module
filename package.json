@@ -21,6 +21,12 @@
     "url": "https://github.com/hrsf113-group-2/checkout_module/issues"
   },
   "homepage": "https://github.com/hrsf113-group-2/checkout_module#readme",
+  "jest": {
+    "setupFilesAfterEnv": [
+      "jest-enzyme"
+    ],
+    "testEnvironment": "enzyme"
+  },
   "devDependencies": {
     "@babel/core": "^7.4.0",
     "@babel/polyfill": "^7.4.3",
@@ -34,6 +40,8 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4",
     "jest": "^24.5.0",
+    "jest-environment-enzyme": "^7.0.2",
+    "jest-enzyme": "^7.0.2",
     "nodemon": "^1.18.10",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0"
