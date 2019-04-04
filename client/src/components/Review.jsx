@@ -9,7 +9,7 @@ const ReviewWrapper = styled.section`
   line-height: 1.33333em;
   color: rgb(72, 72, 72);
   margin: 0px;
-  float: left;
+  display: flex;
 `;
 
 
