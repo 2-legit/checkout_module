@@ -16,6 +16,7 @@ const BookButton = styled.button`
   font-weight: 800;
   height: 46px;
   width: 100%;
+  cursor: pointer;
 `;
 
 
