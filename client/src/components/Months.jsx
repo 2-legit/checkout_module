@@ -13,13 +13,10 @@ const MonthWrapper = styled.section`
   font-weight: bold;
 `;
 
-const PrevMonthButton = styled.button`
-`;
-
 const Months = (props) => {
   return (
     <MonthWrapper>
-      <PrevMonthButton type="button" onClick={() => (props.setPrevMonth())}>&lt;</PrevMonthButton>
+      <button type="button" onClick={() => (props.setPrevMonth())}>&lt;</button>
       <div>
         &nbsp;
         {props.currentMonth()}
