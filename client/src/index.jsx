@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Checkout from './components/Checkout';
+import ConnectedCheckout from './components/ConnectedCheckout';
 
 class App extends React.Component {
   constructor() {
@@ -8,7 +8,7 @@ class App extends React.Component {
   }
   render() {
     return (
-      <div><Checkout /></div>
+      <div><ConnectedCheckout /></div>
     );
   }
 }

@@ -10,6 +10,9 @@ const ReviewWrapper = styled.section`
   color: rgb(72, 72, 72);
   margin: 0px;
   display: flex;
+  padding-bottom: 25px;
+  margin-bottom: 35px;
+  border-bottom: 1px solid #e4e4e4;
 `;
 
 
