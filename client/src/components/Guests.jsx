@@ -10,6 +10,8 @@ const AddGuestWrapper = styled.div`
   font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
   color: rgb(72, 72, 72) !important;
   font-size: 14px !important;
+  height: 36px;
+  margin-bottom: 25px;
 `;
 
 const GuestWrapper = styled.div`
@@ -33,5 +35,3 @@ const Guests = (props) => {
 };
 
 export default Guests;
-
-// onClick={e => { this.setDay('0' + d) }
