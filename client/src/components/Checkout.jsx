@@ -25,33 +25,54 @@ class Checkout extends React.Component {
       checkIn: null,
       checkOut: null,
       guestCount: 1,
+      showCalendar: false,
+      toChange: true,
     };
   }
 
   setCheckIn(value) {
-    if (this.state.checkIn) {
-      this.setState({ checkOut: value });
+    const { toChange } = this.state;
+    if (!toChange) {
+      this.setState({ checkOut: value, showCalendar: false });
     } else {
-      this.setState({ checkIn: value });
+      this.setState({ checkIn: value, showCalendar: false });
     }
   }
 
   addGuest() {
-    if (this.state.guestCount < this.props.room.guests) {
-      this.setState({ guestCount: this.state.guestCount + 1 });
+    const { guestCount } = this.state;
+    const { room } = this.props;
+    if (guestCount < room.guests) {
+      this.setState({ guestCount: guestCount + 1 });
     }
   }
 
   subGuest() {
-    console.log(this.state.guestCount)
-    if (this.state.guestCount > 1) {
-      this.setState({ guestCount: this.state.guestCount - 1 });
+    const { guestCount } = this.state;
+    if (guestCount > 1) {
+      this.setState({ guestCount: guestCount - 1 });
     }
+  }
+
+  chooseCheckIn() {
+    this.setState({
+      showCalendar: true,
+      toChange: true,
+    });
+  }
+
+  chooseCheckOut() {
+    this.setState({
+      showCalendar: true,
+      toChange: false,
+    });
   }
 
   render() {
     const { isLoaded, room } = this.props;
-    const { checkIn, checkOut, guestCount } = this.state;
+    const {
+      checkIn, checkOut, guestCount, showCalendar,
+    } = this.state;
 
     if (!isLoaded) {
       return <div>Loading...</div>;
@@ -60,9 +81,15 @@ class Checkout extends React.Component {
       <Wrapper>
         <div><Cost room={room} /></div>
         <div><Review room={room} /></div>
-        <div><CheckInOut checkIn={checkIn} checkOut={checkOut} /></div>
-        <div><Calendar room={room} setCheckIn={this.setCheckIn.bind(this)}/></div>
-        <div><Guests guestCount={guestCount} addGuest={this.addGuest.bind(this)} subGuest={this.subGuest.bind(this)} /></div>
+        <div><CheckInOut checkIn={checkIn} checkOut={checkOut} chooseCheckIn={this.chooseCheckIn.bind(this)} chooseCheckOut={this.chooseCheckOut.bind(this)} /></div>
+        <div>{showCalendar ? <Calendar room={room} setCheckIn={this.setCheckIn.bind(this)} /> : <React.Fragment></React.Fragment>}</div>
+        <div>
+          <Guests
+            guestCount={guestCount}
+            addGuest={this.addGuest.bind(this)}
+            subGuest={this.subGuest.bind(this)}
+          />
+        </div>
         <div><Book room={room} /></div>
       </Wrapper>
     );
