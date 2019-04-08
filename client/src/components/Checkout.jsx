@@ -52,7 +52,7 @@ class Checkout extends React.Component {
 
   subGuest() {
     const { guestCount } = this.state;
-    if ((guestCount) > 1) {
+    if (guestCount > 1) {
       this.setState({ guestCount: guestCount - 1 });
     }
   }
