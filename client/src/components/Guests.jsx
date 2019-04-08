@@ -50,33 +50,56 @@ const GuestButton = styled.button`
   color: rgb(0, 132, 137);
 `;
 
-const Guests = (props =>
-
-  <div>
-    <GuestWrapper>
-      Guests
+const Guests = ({
+  guestCount,
+  childrenCount,
+  infantCount,
+  showGuestList,
+  listOpen,
+  subGuest,
+  addGuest,
+  subChild,
+  addChild,
+  subInfant,
+  addInfant,
+}) => (
+    <div>
+      <GuestWrapper>
+        Guests
       </GuestWrapper>
-    {props.guestCount + props.childrenCount > 1
-      ? <AddGuestWrapper onClick={() => { props.showGuestList() }}>{props.guestCount + props.childrenCount} Guests</AddGuestWrapper>
-      : <AddGuestWrapper onClick={() => { props.showGuestList() }}>{props.guestCount + props.childrenCount} Guest</AddGuestWrapper>}
-    {props.listOpen ? <ULWrapper className="dd-list">
-      <SpanContainer>
-        <LIWrapper>Adults</LIWrapper>
-        <GuestButton onClick={() => (props.subGuest())}>-</GuestButton>&nbsp;{props.guestCount}&nbsp;
-          <GuestButton onClick={() => (props.addGuest())}>+</GuestButton>
-      </SpanContainer>
-      <SpanContainer>
-        <LIWrapper>Children</LIWrapper>
-        <GuestButton onClick={() => (props.subChild())}>-</GuestButton>&nbsp;{props.childrenCount}&nbsp;
-          <GuestButton onClick={() => (props.addChild())}>+</GuestButton>
-      </SpanContainer>
-      <SpanContainer>
-        <LIWrapper>Infants</LIWrapper>
-        <GuestButton onClick={() => props.subInfant()}>-</GuestButton>&nbsp;{props.infantCount}&nbsp;
-          <GuestButton onClick={() => props.addInfant()}>+</GuestButton>
-      </SpanContainer>
-    </ULWrapper> : <React.Fragment></React.Fragment>}
-  </div>
-);
+      {guestCount + childrenCount > 1
+        ? <AddGuestWrapper onClick={() => { showGuestList(); }}>{guestCount + childrenCount} Guests</AddGuestWrapper>
+        : <AddGuestWrapper onClick={() => { showGuestList(); }}>{guestCount + childrenCount} Guest</AddGuestWrapper>}
+      {listOpen
+        ? (
+          <ULWrapper className="dd-list">
+            <SpanContainer>
+              <LIWrapper>Adults</LIWrapper>
+              <GuestButton onClick={() => (subGuest())}>-</GuestButton>
+              &nbsp;
+          {guestCount}
+              &nbsp;
+          <GuestButton onClick={() => (addGuest())}>+</GuestButton>
+            </SpanContainer>
+            <SpanContainer>
+              <LIWrapper>Children</LIWrapper>
+              <GuestButton onClick={() => (subChild())}>-</GuestButton>
+              &nbsp;
+          {childrenCount}
+              &nbsp;
+          <GuestButton onClick={() => (addChild())}>+</GuestButton>
+            </SpanContainer>
+            <SpanContainer>
+              <LIWrapper>Infants</LIWrapper>
+              <GuestButton onClick={() => subInfant()}>-</GuestButton>
+              &nbsp;
+          {infantCount}
+              &nbsp;
+          <GuestButton onClick={() => addInfant()}>+</GuestButton>
+            </SpanContainer>
+          </ULWrapper>
+        ) : <React.Fragment></React.Fragment>}
+    </div>
+  );
 
 export default Guests;
