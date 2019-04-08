@@ -22,11 +22,14 @@ class Checkout extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      checkIn: null,
-      checkOut: null,
+      checkIn: 'Check In',
+      checkOut: 'Check Out',
       guestCount: 1,
       showCalendar: false,
       toChange: true,
+      listOpen: false,
+      childrenCount: 0,
+      infantCount: 0,
     };
   }
 
@@ -40,9 +43,9 @@ class Checkout extends React.Component {
   }
 
   addGuest() {
-    const { guestCount } = this.state;
+    const { guestCount, childrenCount } = this.state;
     const { room } = this.props;
-    if (guestCount < room.guests) {
+    if ((guestCount + childrenCount) < room.guests) {
       this.setState({ guestCount: guestCount + 1 });
     }
   }
@@ -51,6 +54,35 @@ class Checkout extends React.Component {
     const { guestCount } = this.state;
     if (guestCount > 1) {
       this.setState({ guestCount: guestCount - 1 });
+    }
+  }
+
+  addChild() {
+    const { guestCount, childrenCount } = this.state;
+    const { room } = this.props;
+    if ((guestCount + childrenCount) < room.guests) {
+      this.setState({ childrenCount: childrenCount + 1 });
+    }
+  }
+
+  subChild() {
+    const { childrenCount } = this.state;
+    if ((childrenCount) > 0) {
+      this.setState({ childrenCount: childrenCount - 1 });
+    }
+  }
+
+  addInfant() {
+    const { infantCount } = this.state;
+    if (infantCount < 5) {
+      this.setState({ infantCount: infantCount + 1 });
+    }
+  }
+
+  subInfant() {
+    const { infantCount } = this.state;
+    if (infantCount > 0) {
+      this.setState({ infantCount: infantCount - 1 });
     }
   }
 
@@ -68,10 +100,16 @@ class Checkout extends React.Component {
     });
   }
 
+  showGuestList() {
+    this.setState({
+      listOpen: !this.state.listOpen,
+    });
+  }
+
   render() {
     const { isLoaded, room } = this.props;
     const {
-      checkIn, checkOut, guestCount, showCalendar,
+      checkIn, checkOut, guestCount, showCalendar, listOpen, infantCount, childrenCount,
     } = this.state;
 
     if (!isLoaded) {
@@ -85,9 +123,17 @@ class Checkout extends React.Component {
         <div>{showCalendar ? <Calendar room={room} setCheckIn={this.setCheckIn.bind(this)} /> : <React.Fragment></React.Fragment>}</div>
         <div>
           <Guests
+            infantCount={infantCount}
+            showGuestList={this.showGuestList.bind(this)}
+            listOpen={listOpen}
             guestCount={guestCount}
+            childrenCount={childrenCount}
             addGuest={this.addGuest.bind(this)}
             subGuest={this.subGuest.bind(this)}
+            addChild={this.addChild.bind(this)}
+            subChild={this.subChild.bind(this)}
+            addInfant={this.addInfant.bind(this)}
+            subInfant={this.subInfant.bind(this)}
           />
         </div>
         <div><Book room={room} /></div>
