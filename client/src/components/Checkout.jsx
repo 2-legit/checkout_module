@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import moment from 'moment';
 import Review from './Review';
 import Cost from './Cost';
 import Book from './Book';
@@ -30,6 +31,8 @@ class Checkout extends React.Component {
       listOpen: false,
       childrenCount: 0,
       infantCount: 0,
+      currentCheckIn: moment(),
+      latestCheckOut: moment().add(2, 'years'),
     };
   }
 
@@ -38,7 +41,7 @@ class Checkout extends React.Component {
     if (!toChange) {
       this.setState({ checkOut: value, showCalendar: false });
     } else {
-      this.setState({ checkIn: value, showCalendar: false });
+      this.setState({ checkIn: value, showCalendar: false, currentCheckIn: value }, () => this.checkLatestCheckout());
     }
   }
 
@@ -106,10 +109,26 @@ class Checkout extends React.Component {
     });
   }
 
+  checkLatestCheckout() {
+    let latestCoDate = 365;
+    let checkOut;
+    for (let i = 0; i < this.props.room.bookedDates.length; i++) {
+      if (moment(this.state.currentCheckIn).isBefore(this.props.room.bookedDates[i], 'day')) {
+        if (moment(this.props.room.bookedDates[i]).diff(this.state.currentCheckIn, 'days') < latestCoDate ) {
+          latestCoDate = moment(this.props.room.bookedDates[i]).diff(this.state.currentCheckIn, 'days');
+          checkOut = this.props.room.bookedDates[i];
+        }
+      }
+    }
+    this.setState({
+      latestCheckOut: checkOut,
+    });
+  }
+
   render() {
     const { isLoaded, room } = this.props;
     const {
-      checkIn, checkOut, guestCount, showCalendar, listOpen, infantCount, childrenCount,
+      checkIn, checkOut, guestCount, showCalendar, listOpen, infantCount, childrenCount, currentCheckIn,
     } = this.state;
 
     if (!isLoaded) {
@@ -120,7 +139,7 @@ class Checkout extends React.Component {
         <div><Cost room={room} /></div>
         <div><Review room={room} /></div>
         <div><CheckInOut checkIn={checkIn} checkOut={checkOut} chooseCheckIn={this.chooseCheckIn.bind(this)} chooseCheckOut={this.chooseCheckOut.bind(this)} /></div>
-        <div>{showCalendar ? <Calendar room={room} setCheckIn={this.setCheckIn.bind(this)} /> : <React.Fragment></React.Fragment>}</div>
+        <div>{showCalendar ? <Calendar room={room} currentCheckIn={currentCheckIn} setCheckIn={this.setCheckIn.bind(this)} latestCheckOut={this.state.latestCheckOut} /> : <React.Fragment></React.Fragment>}</div>
         <div>
           <Guests
             infantCount={infantCount}

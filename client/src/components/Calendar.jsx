@@ -37,7 +37,7 @@ class Calendar extends React.Component {
   }
 
   firstDayOfMonth() {
-    let dateObject = this.state.dateObject;
+    const dateObject = this.state.dateObject;
     const firstDay = moment(dateObject).startOf('month').format('d');
     return firstDay;
   }
@@ -71,6 +71,8 @@ class Calendar extends React.Component {
             setCheckOut={this.props.setCheckOut}
             room={this.props.room}
             dateObject={this.state.dateObject}
+            currentCheckIn={this.props.currentCheckIn}
+            latestCheckOut={this.props.latestCheckOut}
           />
         </div>
       </CalendarWrapper>

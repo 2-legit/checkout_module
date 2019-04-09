@@ -50,9 +50,9 @@ const Days = (props) => {
   const daysInMonth = [];
   for (let d = 1; d <= props.totalDaysInMonth(); d += 1) {
     if (d < 10) {
-      if (props.room.bookedDates.indexOf(props.dateObject.format('YYYY-MM-' + 0 + d).toString()) === -1) {
+      if (props.room.bookedDates.indexOf(props.dateObject.format('YYYY-MM-' + 0 + d).toString()) === -1 && moment(props.dateObject.format('YYYY-MM-' + 0 + d)).isAfter(props.currentCheckIn, 'day') && moment(props.dateObject.format('YYYY-MM-' + 0 + d)).isBefore(props.latestCheckOut, 'day')) {
         daysInMonth.push(
-          <VacantDayWrapper key={'0' + d} className="calendarDay" id='vacant' onClick={() => { props.setCheckIn(props.dateObject.format('MM-' + 0 + d + '-YYYY').toString()) }}>
+          <VacantDayWrapper key={'0' + d} className="calendarDay" id='vacant' onClick={() => { props.setCheckIn(props.dateObject.format('MM-' + 0 + d + '-YYYY').toString()); }}>
             {d}
           </VacantDayWrapper>,
         );
@@ -63,15 +63,15 @@ const Days = (props) => {
           </BookedDayWrapper>,
         );
       }
-    } else if (props.room.bookedDates.indexOf(props.dateObject.format('YYYY-MM-' + d).toString()) === -1) {
+    } else if (props.room.bookedDates.indexOf(props.dateObject.format('YYYY-MM-' + d).toString()) === -1 && moment(props.dateObject.format('YYYY-MM-' + 0 + d)).isAfter(props.currentCheckIn, 'day') && moment(props.dateObject.format('YYYY-MM-' + 0 + d)).isBefore(props.latestCheckOut, 'day')) {
       daysInMonth.push(
-        <VacantDayWrapper key={d} className="calendarDay" id='vacant' onClick={e => { props.setCheckIn(props.dateObject.format('MM-' + d + '-YYYY').toString()) }}>
+        <VacantDayWrapper key={d} className="calendarDay" id="vacant" onClick={e => { props.setCheckIn(props.dateObject.format('MM-' + d + '-YYYY').toString()) }}>
           {d}
         </VacantDayWrapper>,
       );
     } else {
       daysInMonth.push(
-        <BookedDayWrapper key={d} className="calendarDay" id='booked'>
+        <BookedDayWrapper key={d} className="calendarDay" id="booked">
           {d}
         </BookedDayWrapper>,
       );
@@ -105,3 +105,9 @@ const Days = (props) => {
 };
 
 export default Days;
+
+
+//Possible solutions:
+ //Sort Array of booked days, take 0th index - not good i think
+ //check 2 months out, see if there is a booked date, take the first day after checkin of that month
+ //
