@@ -34,6 +34,16 @@ class Checkout extends React.Component {
       currentCheckIn: moment(),
       latestCheckOut: moment().add(2, 'years'),
     };
+    this.chooseCheckIn = this.chooseCheckIn.bind(this);
+    this.chooseCheckOut = this.chooseCheckOut.bind(this);
+    this.setCheckIn = this.setCheckIn.bind(this);
+    this.showGuestList = this.showGuestList.bind(this);
+    this.addGuest = this.addGuest.bind(this);
+    this.subGuest = this.subGuest.bind(this);
+    this.addChild = this.addChild.bind(this);
+    this.subChild = this.subChild.bind(this);
+    this.addInfant = this.addInfant.bind(this);
+    this.subInfant = this.subInfant.bind(this);
   }
 
   setCheckIn(value) {
@@ -41,7 +51,8 @@ class Checkout extends React.Component {
     if (!toChange) {
       this.setState({ checkOut: value, showCalendar: false });
     } else {
-      this.setState({ checkIn: value, showCalendar: false, currentCheckIn: value }, () => this.checkLatestCheckout());
+      this.setState({ checkIn: value, showCalendar: false, currentCheckIn: value },
+        () => this.checkLatestCheckout());
     }
   }
 
@@ -110,13 +121,15 @@ class Checkout extends React.Component {
   }
 
   checkLatestCheckout() {
+    const { currentCheckIn } = this.state;
+    const { room } = this.props;
     let latestCoDate = 365;
     let checkOut;
-    for (let i = 0; i < this.props.room.bookedDates.length; i++) {
-      if (moment(this.state.currentCheckIn).isBefore(this.props.room.bookedDates[i], 'day')) {
-        if (moment(this.props.room.bookedDates[i]).diff(this.state.currentCheckIn, 'days') < latestCoDate ) {
-          latestCoDate = moment(this.props.room.bookedDates[i]).diff(this.state.currentCheckIn, 'days');
-          checkOut = this.props.room.bookedDates[i];
+    for (let i = 0; i < room.bookedDates.length; i += 1) {
+      if (moment(currentCheckIn).isBefore(room.bookedDates[i], 'day')) {
+        if (moment(room.bookedDates[i]).diff(currentCheckIn, 'days') < latestCoDate) {
+          latestCoDate = moment(room.bookedDates[i]).diff(currentCheckIn, 'days');
+          checkOut = room.bookedDates[i];
         }
       }
     }
@@ -128,7 +141,15 @@ class Checkout extends React.Component {
   render() {
     const { isLoaded, room } = this.props;
     const {
-      checkIn, checkOut, guestCount, showCalendar, listOpen, infantCount, childrenCount, currentCheckIn,
+      checkIn,
+      checkOut,
+      guestCount,
+      showCalendar,
+      listOpen,
+      infantCount,
+      childrenCount,
+      currentCheckIn,
+      latestCheckOut,
     } = this.state;
 
     if (!isLoaded) {
@@ -138,21 +159,39 @@ class Checkout extends React.Component {
       <Wrapper>
         <div><Cost room={room} /></div>
         <div><Review room={room} /></div>
-        <div><CheckInOut checkIn={checkIn} checkOut={checkOut} chooseCheckIn={this.chooseCheckIn.bind(this)} chooseCheckOut={this.chooseCheckOut.bind(this)} /></div>
-        <div>{showCalendar ? <Calendar room={room} currentCheckIn={currentCheckIn} setCheckIn={this.setCheckIn.bind(this)} latestCheckOut={this.state.latestCheckOut} /> : <React.Fragment></React.Fragment>}</div>
+        <div>
+          <CheckInOut
+            checkIn={checkIn}
+            checkOut={checkOut}
+            chooseCheckIn={this.chooseCheckIn}
+            chooseCheckOut={this.chooseCheckOut}
+          />
+        </div>
+        <div>
+          {showCalendar
+            ? (
+              <Calendar
+                room={room}
+                currentCheckIn={currentCheckIn}
+                setCheckIn={this.setCheckIn}
+                latestCheckOut={latestCheckOut}
+              />
+            )
+            : <React.Fragment></React.Fragment>}
+        </div>
         <div>
           <Guests
             infantCount={infantCount}
-            showGuestList={this.showGuestList.bind(this)}
+            showGuestList={this.showGuestList}
             listOpen={listOpen}
             guestCount={guestCount}
             childrenCount={childrenCount}
-            addGuest={this.addGuest.bind(this)}
-            subGuest={this.subGuest.bind(this)}
-            addChild={this.addChild.bind(this)}
-            subChild={this.subChild.bind(this)}
-            addInfant={this.addInfant.bind(this)}
-            subInfant={this.subInfant.bind(this)}
+            addGuest={this.addGuest}
+            subGuest={this.subGuest}
+            addChild={this.addChild}
+            subChild={this.subChild}
+            addInfant={this.addInfant}
+            subInfant={this.subInfant}
           />
         </div>
         <div><Book room={room} /></div>
