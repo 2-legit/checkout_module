@@ -68,7 +68,7 @@ class Calendar extends React.Component {
 
   render() {
     const {
-      setCheckIn, setCheckOut, room, currentCheckIn, latestCheckOut 
+      setCheckIn, setCheckOut, room, currentCheckIn, latestCheckOut,
     } = this.props;
     const { dateObject } = this.state;
 

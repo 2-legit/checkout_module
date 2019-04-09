@@ -48,9 +48,9 @@ const Days = (props) => {
   }
 
   const checkIfShouldBeVacant = (day) => {
-    let dayToCheck = props.dateObject.format('YYYY-MM-' + day)
+    let dayToCheck = props.dateObject.format('YYYY-MM-' + day);
     if (day < 10) {
-      dayToCheck = props.dateObject.format('YYYY-MM-' + 0 + day)
+      dayToCheck = props.dateObject.format('YYYY-MM-' + 0 + day);
     }
 
     if (props.room.bookedDates.indexOf(dayToCheck.toString()) === -1
