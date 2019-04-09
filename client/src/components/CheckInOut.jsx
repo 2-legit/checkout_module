@@ -45,7 +45,8 @@ const CheckInOut = (props) => {
       </DateWrapper>
       <CheckInOutWrapper>
         <CheckInOutButton onClick={() => props.chooseCheckIn()}>
-          <CheckInOutDate>{checkIn}
+          <CheckInOutDate>
+            {checkIn}
             &nbsp;
           </CheckInOutDate>
           -&gt;&nbsp;

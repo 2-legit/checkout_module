@@ -17,60 +17,79 @@ class Calendar extends React.Component {
     this.state = {
       dateObject: moment(),
     };
+    this.currentMonth = this.currentMonth.bind(this);
+    this.currentYear = this.currentYear.bind(this);
+    this.setNextMonth = this.setNextMonth.bind(this);
+    this.setPrevMonth = this.setPrevMonth.bind(this);
+    this.firstDayOfMonth = this.firstDayOfMonth.bind(this);
+    this.totalDaysInMonth = this.totalDaysInMonth.bind(this);
   }
 
 
   setNextMonth() {
-    let dateObject = Object.assign({}, this.state.dateObject);
-    dateObject = moment(dateObject).add(1, 'month');
+    const { dateObject } = this.state;
+    let newDateObject = Object.assign({}, dateObject);
+    newDateObject = moment(dateObject).add(1, 'month');
     this.setState({
-      dateObject: dateObject,
+      dateObject: newDateObject,
     });
   }
 
   setPrevMonth() {
-    let dateObject = Object.assign({}, this.state.dateObject);
-    dateObject = moment(dateObject).add(-1, 'month');
+    const { dateObject } = this.state;
+    let newDateObject = Object.assign({}, dateObject);
+    newDateObject = moment(newDateObject).add(-1, 'month');
     this.setState({
-      dateObject: dateObject,
+      dateObject: newDateObject,
     });
   }
 
   firstDayOfMonth() {
-    let dateObject = this.state.dateObject;
-    const firstDay = moment(dateObject).startOf('month').format('d');
+    const { dateObject } = this.state;
+    const newDateObject = dateObject;
+    const firstDay = moment(newDateObject).startOf('month').format('d');
     return firstDay;
   }
 
   totalDaysInMonth() {
-    return this.state.dateObject.daysInMonth();
+    const { dateObject } = this.state;
+    return dateObject.daysInMonth();
   }
 
   currentMonth() {
-    return this.state.dateObject.format('MMMM');
+    const { dateObject } = this.state;
+    return dateObject.format('MMMM');
   }
 
   currentYear() {
-    return this.state.dateObject.format('YYYY');
+    const { dateObject } = this.state;
+    return dateObject.format('YYYY');
   }
 
   render() {
+    const {
+      setCheckIn, setCheckOut, room, currentCheckIn, latestCheckOut,
+    } = this.props;
+    const { dateObject } = this.state;
+
     return (
       <CalendarWrapper>
         <div>
           <Months
-            currentMonth={this.currentMonth.bind(this)}
-            currentYear={this.currentYear.bind(this)}
-            setNextMonth={this.setNextMonth.bind(this)}
-            setPrevMonth={this.setPrevMonth.bind(this)}
+            currentMonth={this.currentMonth}
+            currentYear={this.currentYear}
+            setNextMonth={this.setNextMonth}
+            setPrevMonth={this.setPrevMonth}
           />
           <Days
-            firstDayOfMonth={this.firstDayOfMonth.bind(this)}
-            totalDaysInMonth={this.totalDaysInMonth.bind(this)}
-            setCheckIn={this.props.setCheckIn}
-            setCheckOut={this.props.setCheckOut}
-            room={this.props.room}
-            dateObject={this.state.dateObject}
+            firstDayOfMonth={this.firstDayOfMonth}
+            totalDaysInMonth={this.totalDaysInMonth}
+            setCheckIn={setCheckIn}
+            setCheckOut={setCheckOut}
+            room={room}
+            dateObject={dateObject}
+            currentCheckIn={currentCheckIn}
+            latestCheckOut={latestCheckOut}
           />
         </div>
       </CalendarWrapper>
