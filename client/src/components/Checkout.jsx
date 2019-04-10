@@ -26,7 +26,7 @@ class Checkout extends React.Component {
       checkIn: 'Check In',
       checkOut: 'Check Out',
       guestCount: 1,
-      showCalendar: false,
+      showCalendar: true,
       toChange: true,
       listOpen: false,
       childrenCount: 0,

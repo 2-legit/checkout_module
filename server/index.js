@@ -8,7 +8,7 @@ const db = require('../data/index');
 const app = express();
 app.use(morgan('dev'));
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 app.use('/rooms/:room_id', express.static(path.join(__dirname, '..', 'client', 'dist')));
 
